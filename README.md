@@ -40,3 +40,41 @@ In this replication, we have three main components:
 
 1. DO NOT MODIFY or OVERWRITE FILES IN `data/raw`. IF YOU WANT TO SAVE PROCESSED DATA, IT SHOULD BE SAVED IN `data/processed`. ALL TABLES AND FIGURES OUTPUTS THAT WILL BE USED FOR OVERLEAF REPORTS SHOULD BE SAVED IN `output/tables` and `output/figures`.
 2. IN OVERLEAF, TRY TO ONLY EDIT `output/paper/main.tex` document
+
+# README document from original replication file
+
+### *Malaria Suitability, Urbanization and Persistence: Evidence From China Over More Than 2000 Years*  
+
+---
+
+## Replication Code
+
+- **EER-D-16-00243_Main.do**  
+  Contains the Stata code used to replicate the results presented in the main paper (Tables 1–5).
+
+- **EER-D-16-00243_Appendix.do**  
+  Contains the Stata code used to replicate the results presented in the Appendix.
+
+---
+
+## Data Sets
+
+Three datasets are used in the main empirical analysis:
+
+- **SouthChinaPixelLevelMain.dta** – Cross-section, grid-cell level dataset.  
+- **PanelSouthChina.dta** – Grid-cell level panel dataset.  
+- **CountyLevelDataset.dta** – Cross-section, county-level dataset.
+
+---
+
+## Additional Datasets (Robustness Checks)
+
+Seven datasets are employed for robustness analyses:
+
+- **MannEtAl2009Data.dta** – 5×5 degree grid-cell level panel dataset.  
+- **NorthChinaPixelLevel.dta** – Cross-section, grid-cell level dataset for North China.  
+- **PanelPooledChina.dta** – Grid-cell level panel dataset (covering China Proper).  
+- **SouthChinaPixelLevel19011925.dta** – Dataset using climate data from 1901–1925.  
+- **SouthChinaPixelLevel19261950.dta** – Dataset using climate data from 1926–1950.  
+- **SouthChinaPixelLevel19511975.dta** – Dataset using climate data from 1951–1975.  
+- **SouthChinaPixelLevel19762000.dta** – Dataset using climate data from 1976–2000.
