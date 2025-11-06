@@ -3,6 +3,7 @@
 
 # renv folder
 renv/
+renv.lock
 
 # Rprofile
 .Rprofile
