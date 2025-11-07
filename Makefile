@@ -5,7 +5,7 @@
 ################################
 
 ## Directory vars (usually only these need changing)
-inputdir = input/
+datadir = data/
 outputdir = output/
 figsdir = output/figures/
 tabsdir = output/tables/
