@@ -5,7 +5,7 @@ This is a GitHub repository for replicating "Malaria suitability, urbanization a
 ## Collaborators (PLEASE ADD)
 
 [Hyoungchul Kim](https://hchulkim.github.io/)
-[Marc Jo\¨ets]
+[Marc Joëts](https://www.marcjoets.com/)
 
 ## Citation
 
