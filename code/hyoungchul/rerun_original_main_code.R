@@ -102,3 +102,31 @@ ggplot(msmsd_tbl, aes(x = year, y = estimate)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 # save the plot
 ggsave(here("output", "figures", "author_fig2.png"), width = 10, height = 6)
+
+
+## load data for table 3
+pixel_data <- haven::read_dta(here("data", "raw", "SouthChinaPixelLevelMain.dta")) |> as.data.table()
+
+cross_controls <- c(
+  "area","Yangtze","Yellow","Pearl","AbsY","elev","x",
+  "AgriIndexSD","distchinacoast","strahler",
+  "precipitation","temperature","tempSQ","precSQ","temp_x_prec"
+)
+
+# Factor/dummy sets like Stata's i.
+factor_terms <- c("i(RiverBasin)", "i(ClimateZoneGroup)", "i(MacroAll)")
+
+rhs <- paste(c("MSMSD", cross_controls, factor_terms), collapse = " + ")
+rhs2 <- paste(c(cross_controls, factor_terms), collapse = " + ")
+fmla1 <- as.formula(paste("Seats1893 ~", rhs))
+fmla2 <- as.formula(paste("UrbanShare1893 ~", rhs))
+fmla3 <- as.formula(paste("Hierarchy1893 ~", rhs))
+fmla4 <- as.formula(paste("UrbanShare1893 ~ Seats1893 +", rhs2))
+
+m1 <- feols(fmla1, data = pixel_data, cluster = ~ Grid2)
+m2 <- feols(fmla2, data = pixel_data, cluster = ~ Grid2)
+m3 <- feols(fmla3, data = pixel_data, cluster = ~ Grid2)
+m4 <- feols(fmla4, data = pixel_data, cluster = ~ Grid2)
+
+# table 3
+texreg(list(m1, m2, m3, m4), stars = c(0.01, 0.05, 0.1), digits = 3, file = here("output", "tables", "author_table3.tex"))
