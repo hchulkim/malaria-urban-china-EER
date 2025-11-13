@@ -14,7 +14,7 @@ This is a GitHub repository for replicating "Malaria suitability, urbanization a
 
 ## Citation
 
-If you want to cite our replication results or reports, please use this citation
+If you want to cite our replication results or reports, please use this `bibtex` citation
 
 ```
 @article{JoetsKimLovoMurken2025,
