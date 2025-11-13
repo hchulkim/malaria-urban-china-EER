@@ -7,7 +7,7 @@
 
 ## Directory vars (usually only these need changing)
 rdir = code/hyoungchul/
-datadir = data/raw
+datadir = data/raw/
 outputdir = output/
 figdir    = output/figures/
 tabdir    = output/tables/
@@ -34,4 +34,4 @@ $(tabdir)author_table_c1_a.tex $(figdir)author_fig2.png $(tabdir)author_table3.t
 	nix-shell && Rscript $(rdir)rerun_original_main_code.R
 
 $(figdir)author_appendix_fig_a2.png $(tabdir)author_appendix_table_b1.tex $(tabdir)author_appendix_table_c11.tex $(tabdir)author_appendix_table_c11_200.tex &: $(datadir)MannEtAl2009Data.dta $(datadir)CountyLevelDataset.dta $(datadir)SouthChinaPixelLevelMain.dta $(rdir)rerun_original_appendix_code.R
-  nix-shell && Rscript $(rdir)rerun_original_appendix_code.R
+	nix-shell && Rscript $(rdir)rerun_original_appendix_code.R
