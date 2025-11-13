@@ -1,6 +1,9 @@
 # macos file
 .DS_Store
 
+# nix
+result
+
 # renv folder
 renv/
 renv.lock
