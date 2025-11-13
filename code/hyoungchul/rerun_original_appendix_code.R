@@ -35,11 +35,16 @@ ggsave(here("output", "figures", "author_appendix_fig_a2.png"), width = 10, heig
 
 county_data <- haven::read_dta(here("data", "raw", "CountyLevelDataset.dta")) |> as.data.table()
 
-datasummary(ShareUrban + IndustryShare + LNManuOutputPC + LNIncomePC + HanShare + NaturalRateIncrease + ChildShare + InMigrationShare + MSMSD ~ Mean + SD + Min + Max + N, data = county_data,
-  output = "latex", booktabs = TRUE, linesep = "", digits = 3,  
-  format.args = list(scientific = FALSE),
-  rename = c("ShareUrban" = "Urban share", "IndustryShare" = "Industry share", "LNManuOutputPC" = "Log manufacturing output per capita", "LNIncomePC" = "Log income per capita", "HanShare" = "Han share", "NaturalRateIncrease" = "Natural rate of increase", "ChildShare" = "Child share", "InMigrationShare" = "In-migration share", "MSMSD" = "Malaria suitability(SD)"),
-  file = here("output", "tables", "author_appendix_table_b1.tex"))
+# Rename variables for the table
+county_data_renamed <- copy(county_data)
+setnames(county_data_renamed, 
+         old = c("ShareUrban", "IndustryShare", "LNManuOutputPC", "LNIncomePC", "HanShare", "NaturalRateIncrease", "ChildShare", "InMigrationShare", "MSMSD"),
+         new = c("Urban share", "Industry share", "Log manufacturing output per capita", "Log income per capita", "Han share", "Natural rate of increase", "Child share", "In-migration share", "Malaria suitability(SD)"))
+
+datasummary(`Urban share` + `Industry share` + `Log manufacturing output per capita` + `Log income per capita` + `Han share` + `Natural rate of increase` + `Child share` + `In-migration share` + `Malaria suitability(SD)` ~ Mean + SD + Min + Max + N, data = county_data_renamed,
+  output = "kableExtra", format = "latex", booktabs = TRUE, linesep = "", digits = 3,  
+  format.args = list(scientific = FALSE)) |> 
+  save_kable(here("output", "tables", "author_appendix_table_b1.tex"))
 
 
 
