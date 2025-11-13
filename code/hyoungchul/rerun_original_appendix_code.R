@@ -82,7 +82,14 @@ res4 <- feols(fmla4, data = pixel_data, vcov = vcov_conley(lat = "y", lon = "x",
 res5 <- feols(fmla5, data = pixel_data, vcov = vcov_conley(lat = "y", lon = "x", cutoff = 100))
 res6 <- feols(fmla6, data = pixel_data, vcov = vcov_conley(lat = "y", lon = "x", cutoff = 100))
 
-texreg(list(res1, res2, res3, res4, res5, res6), digits = 3, file = here("output", "tables", "author_appendix_table_c11.tex"))
+texreg(list(res1, res2, res3, res4, res5, res6), digits = 3, 
+       booktabs = TRUE, linesep = "",
+       custom.model.names = c("Number of seats 1893", "Urban share 1893", "Hierarchy level 1893", "Urban share 1990", "Manufacturing share 1990", "Urban share 2010"),
+       custom.coef.map = list("MSMSD" = "MSM (SD)"),
+       format.args = list(scientific = FALSE),
+       use.packages = FALSE,
+       table = FALSE,
+       file = here("output", "tables", "author_appendix_table_c11.tex"))
 
 res1 <- feols(fmla1, data = pixel_data, vcov = vcov_conley(lat = "y", lon = "x", cutoff = 200))
 res2 <- feols(fmla2, data = pixel_data, vcov = vcov_conley(lat = "y", lon = "x", cutoff = 200))
@@ -91,4 +98,11 @@ res4 <- feols(fmla4, data = pixel_data, vcov = vcov_conley(lat = "y", lon = "x",
 res5 <- feols(fmla5, data = pixel_data, vcov = vcov_conley(lat = "y", lon = "x", cutoff = 200))
 res6 <- feols(fmla6, data = pixel_data, vcov = vcov_conley(lat = "y", lon = "x", cutoff = 200))
 
-texreg(list(res1, res2, res3, res4, res5, res6), digits = 3, file = here("output", "tables", "author_appendix_table_c11_200.tex"))
+texreg(list(res1, res2, res3, res4, res5, res6), digits = 3, 
+       booktabs = TRUE, linesep = "",
+       custom.model.names = c("Number of seats 1893", "Urban share 1893", "Hierarchy level 1893", "Urban share 1990", "Manufacturing share 1990", "Urban share 2010"),
+       custom.coef.map = list("MSMSD" = "MSM (SD)"),
+       format.args = list(scientific = FALSE),
+       use.packages = FALSE,
+       table = FALSE,
+       file = here("output", "tables", "author_appendix_table_c11_200.tex"))
