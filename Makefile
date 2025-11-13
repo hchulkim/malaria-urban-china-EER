@@ -31,7 +31,7 @@ makefile-dag.png: Makefile
 create: $(tabdir)author_table_c1_a.tex $(figdir)author_fig2.png $(tabdir)author_table3.tex $(tabdir)author_table4.tex $(tabdir)author_table5.tex $(figdir)author_appendix_fig_a2.png $(tabdir)author_appendix_table_b1.tex $(tabdir)author_appendix_table_c11.tex $(tabdir)author_appendix_table_c11_200.tex
 
 $(tabdir)author_table_c1_a.tex $(figdir)author_fig2.png $(tabdir)author_table3.tex $(tabdir)author_table4.tex $(tabdir)author_table5.tex &: $(datadir)PanelSouthChina.dta $(datadir)SouthChinaPixelLevelMain.dta $(datadir)CountyLevelDataset.dta $(rdir)/rerun_original_main_code.R
-	nix-shell && Rscript $(rdir)rerun_original_main_code.R
+	Rscript $(rdir)rerun_original_main_code.R
 
 $(figdir)author_appendix_fig_a2.png $(tabdir)author_appendix_table_b1.tex $(tabdir)author_appendix_table_c11.tex $(tabdir)author_appendix_table_c11_200.tex &: $(datadir)MannEtAl2009Data.dta $(datadir)CountyLevelDataset.dta $(datadir)SouthChinaPixelLevelMain.dta $(rdir)rerun_original_appendix_code.R
-	nix-shell && Rscript $(rdir)rerun_original_appendix_code.R
+	Rscript $(rdir)rerun_original_appendix_code.R
