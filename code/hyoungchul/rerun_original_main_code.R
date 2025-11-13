@@ -44,7 +44,7 @@ models <- c(list(`-200` = m_base),
 # ----- (A) Extract MSMSD into a tidy table -----
 tidy_list <- lapply(names(models), function(nm) {
   m <- models[[nm]]
-  tt <- tidy(m, conf.int = TRUE, vcov = ~ Grid2)
+  tt <- tidy(m, conf.int = TRUE, conf.level = 0.90, vcov = ~ Grid2)
   tt[tt$term == "MSMSD", c("estimate","std.error","conf.low","conf.high","p.value")]
 })
 
@@ -96,7 +96,7 @@ ggplot(msmsd_tbl, aes(x = year, y = estimate)) +
                     paste0(msmsd_tbl$year, " CE"))
   ) +
   labs(x = "Year", y = "MSMSD coefficient (β)",
-       title = "Effect of MSMSD on Seats over time (95% CI, clustered by 2x2 degree grid)") +
+       title = "Effect of MSMSD on Seats over time (90% CI, clustered by 2x2 degree grid)") +
   theme_minimal(base_size = 12) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 # save the plot
@@ -139,6 +139,7 @@ texreg(list(m1, m2, m3, m4), stars = c(0.01, 0.05, 0.1), digits = 3,
        format.args = list(scientific = FALSE),
        custom.coef.map = list("MSMSD" = "MSM (SD)", "Seats1893" = "Number of seats 1893"),
        use.packages = FALSE,
+       table = FALSE,
        file = here("output", "tables", "author_table3.tex"))
 
 
@@ -159,6 +160,7 @@ texreg(list(m5, m6, m7), stars = c(0.01, 0.05, 0.1), digits = 3,
        format.args = list(scientific = FALSE),
        custom.coef.map = list("MSMSD" = "MSM (SD)"),
        use.packages = FALSE,
+       table = FALSE,
        file = here("output", "tables", "author_table4.tex"))
 
 
@@ -202,4 +204,5 @@ texreg(list(m1, m2, m3, m4, m5, m6, m7, m8), stars = c(0.01, 0.05, 0.1), digits 
        format.args = list(scientific = FALSE),
        custom.coef.map = list("MSMSD" = "MSM (SD)"),
        use.packages = FALSE,
+       table = FALSE,
        file = here("output", "tables", "author_table5.tex"))
