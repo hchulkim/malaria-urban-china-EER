@@ -2,7 +2,7 @@
 
 This is a GitHub repository for replicating "Malaria suitability, urbanization and persistence: Evidence from China over more than 2000 years (European Economic Review)" at UKRN Replication Games. 
 
-## Collaborators (PLEASE ADD)
+## Authors
 
 [Marc Joëts](https://www.marcjoets.com/)
 
