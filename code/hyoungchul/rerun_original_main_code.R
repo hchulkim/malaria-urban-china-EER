@@ -2,8 +2,7 @@ if (!require("pacman")) install.packages("pacman")
 pacman::p_load(here, data.table, dplyr, ggplot2, fixest, texreg, kableExtra, broom, glue, modelsummary)
 
 
-# load the data
-
+# load the panel data
 panel_data <- haven::read_dta(here("data", "raw", "PanelSouthChina.dta")) |> as.data.table()
 
 # figure 2, table C.1 panel A
@@ -104,7 +103,7 @@ ggplot(msmsd_tbl, aes(x = year, y = estimate)) +
 ggsave(here("output", "figures", "author_fig2.png"), width = 10, height = 6)
 
 
-## load data for table 3
+## load data for table 3 and 4
 pixel_data <- haven::read_dta(here("data", "raw", "SouthChinaPixelLevelMain.dta")) |> as.data.table()
 
 cross_controls <- c(
@@ -113,9 +112,14 @@ cross_controls <- c(
   "precipitation","temperature","tempSQ","precSQ","temp_x_prec"
 )
 
+
+## Table 3
+
+
 # Factor/dummy sets like Stata's i.
 factor_terms <- c("i(RiverBasin)", "i(ClimateZoneGroup)", "i(MacroAll)")
 
+# table 3
 rhs <- paste(c("MSMSD", cross_controls, factor_terms), collapse = " + ")
 rhs2 <- paste(c(cross_controls, factor_terms), collapse = " + ")
 fmla1 <- as.formula(paste("Seats1893 ~", rhs))
@@ -128,5 +132,60 @@ m2 <- feols(fmla2, data = pixel_data, cluster = ~ Grid2)
 m3 <- feols(fmla3, data = pixel_data, cluster = ~ Grid2)
 m4 <- feols(fmla4, data = pixel_data, cluster = ~ Grid2)
 
-# table 3
+# save the table
 texreg(list(m1, m2, m3, m4), stars = c(0.01, 0.05, 0.1), digits = 3, file = here("output", "tables", "author_table3.tex"))
+
+
+## Table 4
+
+# table 4
+fmla5 <- as.formula(paste("UrbanShare1990 ~", rhs))
+fmla6 <- as.formula(paste("UrbanShare2010 ~", rhs))
+fmla7 <- as.formula(paste("ManufacturingShare1990 ~", rhs))
+m5 <- feols(fmla5, data = pixel_data, cluster = ~ Grid2)
+m6 <- feols(fmla6, data = pixel_data, cluster = ~ Grid2)
+m7 <- feols(fmla7, data = pixel_data, cluster = ~ Grid2)
+
+# save the table
+texreg(list(m5, m6, m7), stars = c(0.01, 0.05, 0.1), digits = 3, file = here("output", "tables", "author_table4.tex"))
+
+
+
+
+
+
+## Table 5
+
+
+## load data for table 5
+county_data <- haven::read_dta(here("data", "raw", "CountyLevelDataset.dta")) |> as.data.table()
+
+
+cross_controls <- c(
+  "yCenter","Yangtze","Yellow","Pearl", "distchinacoast", "strahler", "elev_cropped", "agri_suitR", "pre_mean", "temp_mean", "tempSQ","precSQ","temp_x_prec"
+)
+
+# Factor/dummy sets like Stata's i.
+factor_terms <- c("i(ARiverBasin)", "i(ClimateZoneGroup)", "i(MacroZone)")
+
+rhs <- paste(c("MSMSD", cross_controls, factor_terms), collapse = " + ")
+fmla1 <- as.formula(paste("ShareUrban ~", rhs))
+fmla2 <- as.formula(paste("IndustryShare ~", rhs))
+fmla3 <- as.formula(paste("LNManuOutputPC ~", rhs))
+fmla4 <- as.formula(paste("LNIncomePC ~", rhs))
+fmla5 <- as.formula(paste("HanShare ~", rhs))
+fmla6 <- as.formula(paste("NaturalRateIncrease ~", rhs))
+fmla7 <- as.formula(paste("ChildShare ~", rhs))
+fmla8 <- as.formula(paste("InMigrationShare ~", rhs))
+
+m1 <- feols(fmla1, data = county_data, cluster = ~ Grid2)
+m2 <- feols(fmla2, data = county_data, cluster = ~ Grid2)
+m3 <- feols(fmla3, data = county_data, cluster = ~ Grid2)
+m4 <- feols(fmla4, data = county_data, cluster = ~ Grid2)
+m5 <- feols(fmla5, data = county_data, cluster = ~ Grid2)
+m6 <- feols(fmla6, data = county_data, cluster = ~ Grid2)
+m7 <- feols(fmla7, data = county_data, cluster = ~ Grid2)
+m8 <- feols(fmla8, data = county_data, cluster = ~ Grid2)
+
+# save the table
+texreg(list(m1, m2, m3, m4, m5, m6, m7, m8), stars = c(0.01, 0.05, 0.1), digits = 3, file = here("output", "tables", "author_table5.tex"))
