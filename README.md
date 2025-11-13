@@ -44,7 +44,7 @@ For `Stata`, manually execute the scripts in the `code/` folder. Since `Stata` i
 
 ### R
 
->If you want, you can use `nix` and `rix` for reproducibility. If you don't know what `nix` and/or `rix` is, check it out here: [LINK](https://docs.ropensci.org/rix/index.html). You can use the provided `Makefile` to run all the `R` codes in `nix/rix`.
+>If you want, you can use `nix` and `rix` for reproducibility. If you don't know what `nix` and/or `rix` is, check it out here: [LINK](https://docs.ropensci.org/rix/index.html). You can use the provided `Makefile` to run all the `R` codes in `nix/rix`. Make sure you run the `make` command within the `nix-shell`.
 
 If you don't want to or don't know about `nix/rix`, you can also just manually run the `R` scripts in the `code/` folder.
 
