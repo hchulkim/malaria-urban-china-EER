@@ -18,5 +18,4 @@ ggsave(here("output", "figures", "author_appendix_fig_a1.png"), width = 10, heig
 
 
 # plot histogram of Seats by year
-
 seat_dup <- panel_data[year == -200][, .(n = .N), by = .(Seats)][order(Seats)]

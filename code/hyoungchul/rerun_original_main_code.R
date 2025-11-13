@@ -71,9 +71,9 @@ msmsd_tbl_print <- copy(msmsd_tbl)[
       `p-value` = p.value)]
 
 msmsd_tbl_print %>%
-  kable(format = "html",
-        caption = "Cross-section regressions of Seats on MSMSD (clustered by Grid2)") %>%
-  kable_styling(full_width = FALSE)
+  kable(format = "latex", booktabs = TRUE, linesep = "", digits = 3,
+        format.args = list(scientific = FALSE)) |> 
+        save_kable(here("output", "tables", "author_table_c1_a.tex"))
 
 # ----- (B) Multi-model regression table (texreg) -----
 model_names <- paste0(ifelse(as.integer(names(models)) < 0,
@@ -96,7 +96,7 @@ ggplot(msmsd_tbl, aes(x = year, y = estimate)) +
                     paste0(msmsd_tbl$year, " CE"))
   ) +
   labs(x = "Year", y = "MSMSD coefficient (β)",
-       title = "Effect of MSMSD on Seats over time (95% CI, clustered by Grid2)") +
+       title = "Effect of MSMSD on Seats over time (95% CI, clustered by 2x2 degree grid)") +
   theme_minimal(base_size = 12) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 # save the plot
@@ -133,7 +133,13 @@ m3 <- feols(fmla3, data = pixel_data, cluster = ~ Grid2)
 m4 <- feols(fmla4, data = pixel_data, cluster = ~ Grid2)
 
 # save the table
-texreg(list(m1, m2, m3, m4), stars = c(0.01, 0.05, 0.1), digits = 3, file = here("output", "tables", "author_table3.tex"))
+texreg(list(m1, m2, m3, m4), stars = c(0.01, 0.05, 0.1), digits = 3, 
+       custom.model.names = c("Number of seats 1893", "Urban population 1893", "Hierarchy level 1893", "Urban population 1893"),
+       booktabs = TRUE, linesep = "",
+       format.args = list(scientific = FALSE),
+       custom.coef.map = list("MSMSD" = "MSM (SD)", "Seats1893" = "Number of seats 1893"),
+       use.packages = FALSE,
+       file = here("output", "tables", "author_table3.tex"))
 
 
 ## Table 4
@@ -147,11 +153,13 @@ m6 <- feols(fmla6, data = pixel_data, cluster = ~ Grid2)
 m7 <- feols(fmla7, data = pixel_data, cluster = ~ Grid2)
 
 # save the table
-texreg(list(m5, m6, m7), stars = c(0.01, 0.05, 0.1), digits = 3, file = here("output", "tables", "author_table4.tex"))
-
-
-
-
+texreg(list(m5, m6, m7), stars = c(0.01, 0.05, 0.1), digits = 3, 
+       custom.model.names = c("Urban population 1990", "Urban population 2010", "Manufacturing employment 1990"),
+       booktabs = TRUE, linesep = "",
+       format.args = list(scientific = FALSE),
+       custom.coef.map = list("MSMSD" = "MSM (SD)"),
+       use.packages = FALSE,
+       file = here("output", "tables", "author_table4.tex"))
 
 
 ## Table 5
@@ -188,4 +196,10 @@ m7 <- feols(fmla7, data = county_data, cluster = ~ Grid2)
 m8 <- feols(fmla8, data = county_data, cluster = ~ Grid2)
 
 # save the table
-texreg(list(m1, m2, m3, m4, m5, m6, m7, m8), stars = c(0.01, 0.05, 0.1), digits = 3, file = here("output", "tables", "author_table5.tex"))
+texreg(list(m1, m2, m3, m4, m5, m6, m7, m8), stars = c(0.01, 0.05, 0.1), digits = 3,
+       custom.model.names = c("Urban share", "Industry share", "Log manufacturing output per capita", "Log income per capita", "Han share", "Natural rate of increase", "Child share", "In-migration share"),
+       booktabs = TRUE, linesep = "",
+       format.args = list(scientific = FALSE),
+       custom.coef.map = list("MSMSD" = "MSM (SD)"),
+       use.packages = FALSE,
+       file = here("output", "tables", "author_table5.tex"))
