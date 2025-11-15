@@ -40,7 +40,7 @@ If you want to cite our replication results or reports, please use this `bibtex`
 
 ### Stata
 
-For `Stata`, manually execute the scripts in the `code/` folder. Since `Stata` is a licensed program, it should generally run without issues on other computers. However, you must have a valid license to use it.
+For `Stata`, manually execute the script `Robustness_analysis_I4R.do` in the `code/` folder. Since `Stata` is a licensed program, it should generally run without issues on other computers. However, you must have a valid license to use it. For `Stata`, you need to manually set the path directory to run the code.
 
 ### R
 
