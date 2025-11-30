@@ -30,13 +30,17 @@ If you want to cite our replication results or reports, please use this `bibtex`
 ## File structure
 
 - `code/`: This folder contains code scripts used to creates replication results in the report. It also contains two original `Stata` do files (`EER-D-16-00243_Main.do` and `EER-D-16-00243_Appendix.do`) of the original authors.
-- `data/raw/`: This folder contains original data provided by the original authors.
+- `data/raw/`: This folder contains original data provided by the original authors. This GitHub does not contain the original data. However, original authors' raw data is publicly available at [https://www.sciencedirect.com/science/article/pii/S0014292116302355](https://www.sciencedirect.com/science/article/pii/S0014292116302355).
 - `original-scripts/`: This folder contains a zip file of the replication package provided by the `European Economic Review`.
 - `output/tables/`: This folder contains tables used in the replication report.
 - `output/figures/`: This folder contains figures used in the replication report.
 - `output/paper/`: This folder contains replication report.
 
 ## Replication instructions
+
+### Original authors' raw data
+
+This GitHub does not contain the original data. However, original authors' raw data is publicly available at [https://www.sciencedirect.com/science/article/pii/S0014292116302355](https://www.sciencedirect.com/science/article/pii/S0014292116302355). If you want to run our results, please download the authors' data into the `data/raw/` folder.
 
 ### Stata
 
